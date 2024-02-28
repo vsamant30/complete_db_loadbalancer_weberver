@@ -1,0 +1,11 @@
+---
+# tasks file for loadbalancer
+- name: Install load balancer software
+  package:
+    name: haproxy
+    state: present
+
+- name: Copy configuration file
+  template:
+    src: haproxy.cfg.j2
+    dest: /etc/haproxy/haproxy.cfg

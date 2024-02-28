@@ -1,0 +1,37 @@
+---
+# tasks file for database
+
+- name: Ensure MySQL is installed and running 
+  package:
+    name: mysql-server 
+    state: present
+
+- name: Start MySQL service
+  service:
+    name: mysqld
+    state: started
+    enabled: yes
+
+      #- name: Create a database
+      #  mysql_db:
+      #    name: my_database
+      #    state: present
+
+- name: Create a database
+  community.mysql.mysql_db:
+    name: mydatabase
+    state: present
+
+- name: Create a user
+  mysql_user:
+    name: my_user
+    password: my_password
+    state: present
+
+- name: Create a MySQL user
+  community.mysql.mysql_user:
+    name: my_user
+    password: my_password
+    priv: '*.*:ALL'  # Replace with appropriate privileges
+    state: present
+
